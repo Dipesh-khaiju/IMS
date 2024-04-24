@@ -7,10 +7,12 @@ const app=express();
 
 dotenv.config();
 
+app.use(express.json());
+app.use("/api/products",HandleDataRoutes)
+
 app.get("/",(req,res)=>{
     res.send("Home Page")
 })
-app.use("/api/products",HandleDataRoutes)
 
 app.listen(3000,()=>{
   mongoConnect();
