@@ -42,14 +42,14 @@ const AllProductsSection = () => {
 
                   <button
                     type="button"
-                    className="text-gray-700 border border-gray-700 hover:text-blue-400 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center me-2 "
+                    className="text-gray-700 border border-gray-700 hover:text-blue-400 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center me-2 "
                   >
                 
                     <FaPlus size={15} />
                   </button>
                   <button
                     type="button"
-                    className="text-gray-700 border border-gray-700 hover:text-blue-400 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center me-2 "
+                    className="text-gray-700 border border-gray-700 hover:text-blue-400 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center me-2 "
                   >
                 
                     <FiMinus size={15} />
@@ -58,7 +58,7 @@ const AllProductsSection = () => {
                 </div>
               </div>
 
-              <div className="absolute flex gap-4 right-3 bottom-3">
+              <div className="absolute flex gap-4 right-3 bottom-0">
                 <FiEdit size={25} />
                 <AiTwotoneDelete size={25} />
               </div>
