@@ -1,8 +1,9 @@
 import React from 'react'
+import AllProductsSection from '../components/AllProductsSection'
 
 const DashBoard = () => {
   return (
-    <div>DashBoard</div>
+  <AllProductsSection />
   )
 }
 

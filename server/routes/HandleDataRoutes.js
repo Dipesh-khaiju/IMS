@@ -4,9 +4,12 @@ import HandleStockIncrease from "../controllers/updateStock/HandleIncreaseStock.
 import HandleStockDecrease from "../controllers/updateStock/HandleDecreaseStock.js"
 import HandleAddStock from "../controllers/HandleAddStock.js";
 import HandleStockDelete from "../controllers/HandleStockDelete.js"
+import GetProducts from "../controllers/GetProducts.js";
 
 const router = express.Router();
 
+
+router.get("/getProducts",GetProducts);
 
 router.post("/addProduct",HandleAddStock);
 router.post("/deleteProduct/:id",HandleStockDelete);
