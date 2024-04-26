@@ -1,11 +1,12 @@
 import React from "react";
 import useGetProducts from "../hooks/useGetProducts";
-import { FiEdit } from "react-icons/fi";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa6";
 import { FiMinus } from "react-icons/fi";
+import { EditModal } from "./Modal/EditModal";
 
 const AllProductsSection = () => {
+  
   const { products, loading, error } = useGetProducts();
   if (loading)
     return (
@@ -59,8 +60,8 @@ const AllProductsSection = () => {
               </div>
 
               <div className="absolute flex gap-4 right-3 bottom-0">
-                <FiEdit size={25} />
-                <AiTwotoneDelete size={25} />
+                <EditModal />
+                <AiTwotoneDelete  size={25} />
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import AllProductsSection from "../components/AllProductsSection";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { AddProductsModal } from "../components/Modal/AddProductsModal";
 
 const DashBoard = () => {
   return (
@@ -13,12 +14,7 @@ const DashBoard = () => {
             </h1>
           </div>
           <div class="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0 space-x-4">
-            <button class="bg-gray-200 inline-flex mr-40 py-3 px-5 rounded-lg items-center hover:bg-gray-300 focus:outline-none">
-              <IoIosAddCircleOutline size={30} />
-              <span class="ml-4 flex items-start flex-col leading-none">
-                <span class="title-font font-medium">Add Products</span>
-              </span>
-            </button>
+           <AddProductsModal />
           </div>
         </div>
       </section>
