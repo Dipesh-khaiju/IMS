@@ -7,7 +7,7 @@ const useGetProducts = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData1 = async () => {
             const url = "http://localhost:3000/api/products/getProducts"; // Define the URL here
             try {
                 const response = await axios.get(url);
@@ -20,12 +20,14 @@ const useGetProducts = () => {
             }
         };
 
-        fetchData();
+      
+            fetchData1();
+     
 
         return () => {};
     }, []);
 
-    return { products, loading, error };
+    return { products, loading, error  };
 };
 
 export default useGetProducts;

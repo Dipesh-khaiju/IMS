@@ -14,7 +14,7 @@ const DashBoard = () => {
             </h1>
           </div>
           <div class="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0 space-x-4">
-           <AddProductsModal />
+           <AddProductsModal  />
           </div>
         </div>
       </section>

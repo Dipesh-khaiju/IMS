@@ -17,6 +17,16 @@ const AllProductsSection = () => {
     }
   }, [fetchedProducts, loading, error]);
 
+
+  const fetchProducts = async () => {
+    try {
+    const url = "http://localhost:3000/api/products/getProducts";
+    const response = await axios.get(url);
+    setProducts(response.data);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
+  };
   const handleDelete = async (productId) => {
     try {
       await axios.delete(`http://localhost:3000/api/products/deleteProduct/${productId}`);
@@ -29,6 +39,39 @@ const AllProductsSection = () => {
       toast.error("Failed to delete product");
     }
   };
+  const handleIncrease = async (productId) => {
+    try {
+      await axios.put(`http://localhost:3000/api/products/increase/${productId}`);
+      setProducts(prevProducts =>
+        prevProducts.map(product =>
+          product._id === productId ? { ...product, stock: product.stock + 1 } : product
+        )
+      );
+      toast.success("Stock Increased successfully");
+    } catch (error) {
+      console.error("Error increasing stock:", error);
+      console.log("Response data:", error.response.data);
+      console.log("Response headers:", error.response.headers);
+      toast.error("Failed to increase stock");
+    }
+  };
+  const handleDecrease = async (productId) => {
+    try {
+      await axios.put(`http://localhost:3000/api/products/decrease/${productId}`);
+      setProducts(prevProducts =>
+        prevProducts.map(product =>
+          product._id === productId ? { ...product, stock: product.stock - 1 } : product
+        )
+      );
+      toast.success("Stock Decreased successfully");
+    } catch (error) {
+      console.error("Error decreasing stock:", error);
+      console.log("Response data:", error.response.data);
+      console.log("Response headers:", error.response.headers);
+      toast.error("Failed to decrease stock");
+    }
+  };
+
 
   if (loading) {
     return (
@@ -70,19 +113,19 @@ const AllProductsSection = () => {
                     type="button"
                     className="text-gray-700 border border-gray-700 hover:text-blue-400 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center me-2 "
                   >
-                    <FaPlus size={15} />
+                    <FaPlus onClick={()=>handleIncrease(product._id)} size={15} />
                   </button>
                   <button
                     type="button"
                     className="text-gray-700 border border-gray-700 hover:text-blue-400 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center me-2 "
                   >
-                    <FiMinus size={15} />
+                    <FiMinus onClick={()=>handleDecrease(product._id)} size={15} />
                   </button>
                 </div>
               </div>
 
               <div className="absolute flex gap-4 right-3 bottom-0">
-                <EditModal />
+                <EditModal productId={product._id} onEditSuccess={fetchProducts}/>
                 <AiTwotoneDelete className="cursor-pointer" onClick={() => handleDelete(product._id)} size={25} />
               </div>
             </div>

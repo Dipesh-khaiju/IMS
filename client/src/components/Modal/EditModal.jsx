@@ -1,122 +1,88 @@
 import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
+import axios from "axios";
+import toast from "react-hot-toast";
 
-export function EditModal() {
+export function EditModal({ productId, onEditSuccess }) {
   const [openModal, setOpenModal] = useState(false);
-  const [email, setEmail] = useState("");
+  const [editProduct, setEditProduct] = useState({
+    title: "",
+    description: "",
+    category: "",
+    stock: "",
+    brand: "",
+    price: "",
+    image: "",
+  });
 
   function onCloseModal() {
     setOpenModal(false);
-    setEmail("");
+  }
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setEditProduct((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   }
 
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const idProduct = productId;
+      const res = await axios.put(
+        `http://localhost:3000/api/products/update/${idProduct}`,
+        editProduct
+      );
+      console.log("Product Edited", res.data);
+      onCloseModal();
+      toast.success("Product Edited Successfully");
+      if (typeof onEditSuccess === "function") {
+        onEditSuccess();
+      }
+    } catch (error) {
+      console.error("Error editing product:", error);
+      console.log("Response data:", error.response.data);
+      console.log("Response headers:", error.response.headers);
+      toast.error("Failed to Edit product");
+    }
+  };
   return (
     <>
-      <button
-        onClick={() => setOpenModal(true)} >
-
+      <button onClick={() => setOpenModal(true)}>
         <FiEdit size={25} />
       </button>
 
       <Modal show={openModal} size="md" onClose={onCloseModal} popup>
         <Modal.Header />
         <Modal.Body>
-          <div className="space-y-6">
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-       Edit Product
-            </h3>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="title" value="Title" />
+          <form onSubmit={handleEditSubmit}>
+            <div className="space-y-6">
+              <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+                Edit Product
+              </h3>
+
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="stock" value="Stock" />{" "}
+                  <span className="text-sm text-red-400">*Only Num</span>
+                </div>
+                <TextInput
+                  id="stock"
+                  name="stock"
+                  placeholder=""
+                  value={editProduct.stock}
+                  onChange={handleChange}
+                />
               </div>
-              <TextInput
-                id="title"
-                placeholder=""
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="title" value="Description" />
+
+              <div className="mt-5 w-full">
+                <Button type="submit">Edit</Button>
               </div>
-              <TextInput
-                id="title"
-                placeholder=""
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
             </div>
-          
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="title" value="Category" />
-              </div>
-              <TextInput
-                id="category"
-                placeholder=""
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="title" value="Stock" />
-              </div>
-              <TextInput
-                id="stock"
-                placeholder=""
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="title" value="Brand" />
-              </div>
-              <TextInput
-                id="brand"
-                placeholder=""
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="title" value="Price" />
-              </div>
-              <TextInput
-                id="Price"
-                placeholder=""
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="title" value="Image Link" />
-              </div>
-              <TextInput
-                id="image"
-                placeholder=""
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </div>
-            
-            <div className="w-full">
-              <Button>Edit</Button>
-            </div>
-         
-          </div>
+          </form>
         </Modal.Body>
       </Modal>
     </>
