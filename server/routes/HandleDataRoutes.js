@@ -12,7 +12,8 @@ const router = express.Router();
 router.get("/getProducts",GetProducts);
 
 router.post("/addProduct",HandleAddStock);
-router.post("/deleteProduct/:id",HandleStockDelete);
+
+router.delete("/deleteProduct/:id",HandleStockDelete);
 
 router.put("/update/:id",HandleUpdate)
 router.put("/increase/:id",HandleStockIncrease);
