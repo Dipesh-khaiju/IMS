@@ -2,9 +2,11 @@ import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import toast from "react-hot-toast";
-import axios from "axios"
+import axios from "axios";
+
 
 export function AddProductsModal() {
+
   const [openModal, setOpenModal] = useState(false);
  const [addProduct,setAddProduct] = useState({
     title:"",
@@ -37,8 +39,10 @@ export function AddProductsModal() {
     try{
         const res = await axios.post("http://localhost:3000/api/products/addProduct",addProduct);
         console.log("Product Added",res.data);
+
         onCloseModal();
         toast.success("Product Added Successfully");
+        fetchProducts();
         
     }
     catch(err){

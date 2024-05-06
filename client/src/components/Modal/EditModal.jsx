@@ -4,16 +4,10 @@ import { FiEdit } from "react-icons/fi";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export function EditModal({ productId, onEditSuccess }) {
+export function EditModal({ productId ,onEditSuccess}) {
   const [openModal, setOpenModal] = useState(false);
   const [editProduct, setEditProduct] = useState({
-    title: "",
-    description: "",
-    category: "",
     stock: "",
-    brand: "",
-    price: "",
-    image: "",
   });
 
   function onCloseModal() {

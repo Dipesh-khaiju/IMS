@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import useGetProducts from "../hooks/useGetProducts";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa6";
 import { FiMinus } from "react-icons/fi";
 import { EditModal } from "./Modal/EditModal";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useProducts } from "../context/ProductsContext";
 
 const AllProductsSection = () => {
-  const { products: fetchedProducts, loading, error } = useGetProducts();
+  const { products: fetchedProducts, loading, error } = useProducts();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -17,19 +17,20 @@ const AllProductsSection = () => {
     }
   }, [fetchedProducts, loading, error]);
 
-
   const fetchProducts = async () => {
     try {
-    const url = "http://localhost:3000/api/products/getProducts";
-    const response = await axios.get(url);
-    setProducts(response.data);
-  } catch (error) {
-    console.error("Error fetching products:", error);
-  }
+      const url = "http://localhost:3000/api/products/getProducts";
+      const response = await axios.get(url);
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   };
   const handleDelete = async (productId) => {
     try {
-      await axios.delete(`http://localhost:3000/api/products/deleteProduct/${productId}`);
+      await axios.delete(
+        `http://localhost:3000/api/products/deleteProduct/${productId}`
+      );
       setProducts(products.filter((product) => product._id !== productId));
       toast.success("Product deleted successfully");
     } catch (error) {
@@ -41,10 +42,14 @@ const AllProductsSection = () => {
   };
   const handleIncrease = async (productId) => {
     try {
-      await axios.put(`http://localhost:3000/api/products/increase/${productId}`);
-      setProducts(prevProducts =>
-        prevProducts.map(product =>
-          product._id === productId ? { ...product, stock: product.stock + 1 } : product
+      await axios.put(
+        `http://localhost:3000/api/products/increase/${productId}`
+      );
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product._id === productId
+            ? { ...product, stock: product.stock + 1 }
+            : product
         )
       );
       toast.success("Stock Increased successfully");
@@ -57,10 +62,14 @@ const AllProductsSection = () => {
   };
   const handleDecrease = async (productId) => {
     try {
-      await axios.put(`http://localhost:3000/api/products/decrease/${productId}`);
-      setProducts(prevProducts =>
-        prevProducts.map(product =>
-          product._id === productId ? { ...product, stock: product.stock - 1 } : product
+      await axios.put(
+        `http://localhost:3000/api/products/decrease/${productId}`
+      );
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product._id === productId
+            ? { ...product, stock: product.stock - 1 }
+            : product
         )
       );
       toast.success("Stock Decreased successfully");
@@ -71,7 +80,6 @@ const AllProductsSection = () => {
       toast.error("Failed to decrease stock");
     }
   };
-
 
   if (loading) {
     return (
@@ -113,20 +121,33 @@ const AllProductsSection = () => {
                     type="button"
                     className="text-gray-700 border border-gray-700 hover:text-blue-400 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center me-2 "
                   >
-                    <FaPlus onClick={()=>handleIncrease(product._id)} size={15} />
+                    <FaPlus
+                      onClick={() => handleIncrease(product._id)}
+                      size={15}
+                    />
                   </button>
                   <button
                     type="button"
                     className="text-gray-700 border border-gray-700 hover:text-blue-400 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center me-2 "
                   >
-                    <FiMinus onClick={()=>handleDecrease(product._id)} size={15} />
+                    <FiMinus
+                      onClick={() => handleDecrease(product._id)}
+                      size={15}
+                    />
                   </button>
                 </div>
               </div>
 
               <div className="absolute flex gap-4 right-3 bottom-0">
-                <EditModal productId={product._id} onEditSuccess={fetchProducts}/>
-                <AiTwotoneDelete className="cursor-pointer" onClick={() => handleDelete(product._id)} size={25} />
+                <EditModal
+                  productId={product._id}
+                  onEditSuccess={fetchProducts}
+                />
+                <AiTwotoneDelete
+                  className="cursor-pointer"
+                  onClick={() => handleDelete(product._id)}
+                  size={25}
+                />
               </div>
             </div>
           </div>
