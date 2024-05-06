@@ -1,14 +1,16 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Header from './components/Header'
-import AllProductsSection from './components/AllProductsSection'
-import DashBoard from './pages/DashBoard'
+import DashBoard from './components/DashBoard'
 import { Toaster } from 'react-hot-toast'
+import  Footer  from './components/Footer.jsx'
 
 const App = () => {
+  const [products, setProducts] = useState([]);
   return (
     <>
-    <Header  />
-    <DashBoard />
+    <Header setProducts={setProducts}  />
+    <DashBoard products={products} />
+    <Footer />
     <Toaster />
     </>
   )

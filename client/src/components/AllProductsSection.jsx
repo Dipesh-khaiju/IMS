@@ -83,7 +83,7 @@ const AllProductsSection = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center text-5xl">
+      <div className="flex items-center justify-center p-40 text-5xl">
         Loading...
       </div>
     );

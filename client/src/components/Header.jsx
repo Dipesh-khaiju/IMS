@@ -1,8 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import SearchInput from "./SearchInput";
 import { CiLogout } from "react-icons/ci";
 
-const Header = () => {
+const Header = ({ setProducts }) => {
   return (
     <div data-theme="cupcake" className="navbar shadow-lg border-b-4 rounded-lg border-gray-300  ">
       <div className="flex-1">
@@ -47,7 +47,7 @@ const Header = () => {
         <a className=" ml-4 text-2xl">INVENTORY MANAGEMENT SYSTEM</a>
       </div>
       <div className="flex-none gap-6">
-        <SearchInput />
+        <SearchInput  setProducts={setProducts}/>
 
         <div className="dropdown dropdown-end ml-5">
           <div tabIndex={0} role="button" className="avatar">

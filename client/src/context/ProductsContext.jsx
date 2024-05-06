@@ -27,12 +27,10 @@ export const ProductsProvider = ({ children }) => {
         return () => {};
     }, []);
 
-    const fetchProducts = async () => {
-        fetchData();
-    };
+    
 
     return (
-        <ProductsContext.Provider value={{ products, loading, error, fetchProducts }}>
+        <ProductsContext.Provider value={{ products, loading, error}}>
             {children}
         </ProductsContext.Provider>
     );

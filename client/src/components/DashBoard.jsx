@@ -1,9 +1,8 @@
 import React from "react";
-import AllProductsSection from "../components/AllProductsSection";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { AddProductsModal } from "../components/Modal/AddProductsModal";
+import AllProductsSection from "./AllProductsSection";
+import { AddProductsModal } from "./Modal/AddProductsModal";
 
-const DashBoard = () => {
+const DashBoard = ({products}) => {
   return (
     <>
       <section data-theme="cupcake" class="text-gray-600 body-font">
@@ -18,7 +17,7 @@ const DashBoard = () => {
           </div>
         </div>
       </section>
-      <AllProductsSection />
+      <AllProductsSection products={products} />
     </>
   );
 };

@@ -39,10 +39,10 @@ export function AddProductsModal() {
     try{
         const res = await axios.post("http://localhost:3000/api/products/addProduct",addProduct);
         console.log("Product Added",res.data);
-
         onCloseModal();
         toast.success("Product Added Successfully");
-        fetchProducts();
+        window.location.reload();
+      
         
     }
     catch(err){

@@ -5,6 +5,7 @@ import HandleStockDecrease from "../controllers/updateStock/HandleDecreaseStock.
 import HandleAddStock from "../controllers/HandleAddStock.js";
 import HandleStockDelete from "../controllers/HandleStockDelete.js"
 import GetProducts from "../controllers/GetProducts.js";
+import HandleSearch from "../controllers/HandleSearch.js"
 
 const router = express.Router();
 
@@ -18,6 +19,8 @@ router.delete("/deleteProduct/:id",HandleStockDelete);
 router.put("/update/:id",HandleUpdate)
 router.put("/increase/:id",HandleStockIncrease);
 router.put("/decrease/:id",HandleStockDecrease);
+
+router.get("/search",HandleSearch)
 
 
 export  default router;
