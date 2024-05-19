@@ -10,7 +10,7 @@ export const ProductsProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = "https://ims-j0w2.onrender.com/api/products/getProducts";
+            const url = "https://ims-sdhv.onrender.com/api/products/getProducts";
             try {
                 const response = await axios.get(url);
                 setProducts(response.data);

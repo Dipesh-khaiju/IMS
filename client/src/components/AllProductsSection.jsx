@@ -19,7 +19,7 @@ const AllProductsSection = () => {
 
   const fetchProducts = async () => {
     try {
-      const url = "https://ims-j0w2.onrender.com/api/products/getProducts";
+      const url = "https://ims-sdhv.onrender.com/api/products/getProducts";
       const response = await axios.get(url);
       setProducts(response.data);
     } catch (error) {
@@ -29,7 +29,7 @@ const AllProductsSection = () => {
   const handleDelete = async (productId) => {
     try {
       await axios.delete(
-        `https://ims-j0w2.onrender.com/api/products/deleteProduct/${productId}`
+        `https://ims-sdhv.onrender.com/api/products/deleteProduct/${productId}`
       );
       setProducts(products.filter((product) => product._id !== productId));
       toast.success("Product deleted successfully");
@@ -43,7 +43,7 @@ const AllProductsSection = () => {
   const handleIncrease = async (productId) => {
     try {
       await axios.put(
-        `https://ims-j0w2.onrender.com/api/products/increase/${productId}`
+        `https://ims-sdhv.onrender.com/api/products/increase/${productId}`
       );
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
@@ -63,7 +63,7 @@ const AllProductsSection = () => {
   const handleDecrease = async (productId) => {
     try {
       await axios.put(
-        `https://ims-j0w2.onrender.com/api/products/decrease/${productId}`
+        `https://ims-sdhv.onrender.com/api/products/decrease/${productId}`
       );
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
