@@ -15,7 +15,7 @@ const SearchInput = ({setProducts}) => {
     e.preventDefault();
 
     try {
-      const response = await axios.get(`http://localhost:3000/api/products/search?query=${searchItem}`);
+      const response = await axios.get(`https://ims-j0w2.onrender.com/api/products/search?query=${searchItem}`);
       console.log('Response data:', response.data);
    
       if(response.data.length === 0){
