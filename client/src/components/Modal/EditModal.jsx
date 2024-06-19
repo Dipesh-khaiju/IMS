@@ -27,7 +27,7 @@ export function EditModal({ productId ,onEditSuccess}) {
     try {
       const idProduct = productId;
       const res = await axios.put(
-        `http://localhost:3000/api/products/update/${idProduct}`,
+        `https://ims-sdhv.onrender.com/api/products/update/${idProduct}`,
         editProduct
       );
       console.log("Product Edited", res.data);

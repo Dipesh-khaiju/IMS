@@ -37,7 +37,7 @@ export function AddProductsModal() {
   const handleSubmit=  async (e)=>{
     e.preventDefault();
     try{
-        const res = await axios.post("http://localhost:3000/api/products/addProduct",addProduct);
+        const res = await axios.post("https://ims-sdhv.onrender.com/api/products/addProduct",addProduct);
         console.log("Product Added",res.data);
         onCloseModal();
         toast.success("Product Added Successfully");
